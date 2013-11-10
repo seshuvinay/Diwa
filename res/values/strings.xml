@@ -9,4 +9,6 @@
 	<string name="add">Add</string>
 	<string name="category_edt_hint">Category</string>
 	<string name="info">info</string>
+	<string name="question">%s, What would you like to wear today?</string>
+	
 </resources>
