@@ -42,6 +42,7 @@ public class UploadStuffActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		android.os.Process.killProcess(android.os.Process.myPid());
+		finish();
 	}
 
 	@Override
@@ -58,13 +59,13 @@ public class UploadStuffActivity extends Activity {
 	}
 
 	private void setUi() {
-		
+
 		try {
 			DBAdapter dba = new DBAdapter(UploadStuffActivity.this);
 			dba.open();
 			Cursor cr = dba.getImagesByCatId(catId);
 			cr.moveToFirst();
-			bitmaps = new Bitmap[cr.getCount()];
+			bitmaps = new Bitmap[cr.getCount()+1];
 			imagePaths = new String[cr.getCount()];
 			ids = new String[cr.getCount()];
 			for (int i = 0; i < cr.getCount(); i++) {
@@ -78,10 +79,14 @@ public class UploadStuffActivity extends Activity {
 
 				cr.moveToNext();
 			}
-			 bitmaps[cr.getCount()-1] = BitmapFactory.decodeResource(getResources(),
-					R.drawable.zovilogo);
+			if (cr.getCount()>0) {
+				bitmaps[cr.getCount() ] = BitmapFactory.decodeResource(
+						getResources(), R.drawable.zovilogo);
+			}
 			/*
-			bitmaps[cr.getCount()]=immutableBitmap.copy(Bitmap.Config.ARGB_8888, true);*/
+			 * bitmaps[cr.getCount()]=immutableBitmap.copy(Bitmap.Config.ARGB_8888
+			 * , true);
+			 */
 			dba.close();
 			MyAdapter adapter = new MyAdapter(UploadStuffActivity.this, bitmaps);
 			mGridView.setAdapter(adapter);
