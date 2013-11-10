@@ -26,7 +26,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.Toast;
 
 public class UploadStuffActivity extends Activity {
 	private GridView mGridView;
@@ -50,7 +49,6 @@ public class UploadStuffActivity extends Activity {
 			setUi();
 			setUiListener();
 		} catch (Exception e) {
-			Toast.makeText(UploadStuffActivity.this, e.toString(), 5000).show();
 		}
 	}
 
@@ -61,7 +59,6 @@ public class UploadStuffActivity extends Activity {
 			dba.open();
 			Cursor cr = dba.getImagesByCatId(catId);
 			cr.moveToFirst();
-			Toast.makeText(UploadStuffActivity.this, Integer.toString(cr.getCount()), 5000).show();
 			bitmaps = new Bitmap[cr.getCount()];
 			imagePaths = new String[cr.getCount()];
 			ids = new String[cr.getCount()];
@@ -85,7 +82,6 @@ public class UploadStuffActivity extends Activity {
 			mGridView.setAdapter(adapter);
 		} catch (Exception e) {
 
-			Toast.makeText(UploadStuffActivity.this, e.toString(), 5000).show();
 		}
 	}
 
@@ -157,14 +153,10 @@ public class UploadStuffActivity extends Activity {
 			if (requestCode == CAMERA_REQUEST
 					&& resultCode == Activity.RESULT_OK) {
 				// imagePath already saved
-				Toast.makeText(UploadStuffActivity.this, imagePath, 5000)
-						.show();
 			} else if (requestCode == GALLERY_REQUEST
 					&& resultCode == Activity.RESULT_OK) {
 				Uri imageUri = data.getData();
 				imagePath = getRealPathFromURI(imageUri);
-				Toast.makeText(UploadStuffActivity.this, imagePath, 5000)
-						.show();
 			} else if (resultCode == Activity.RESULT_CANCELED) {
 				imagePath = "";
 			}
@@ -178,7 +170,6 @@ public class UploadStuffActivity extends Activity {
 					.putExtra("cat_name", categoryName));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			Toast.makeText(UploadStuffActivity.this, e.toString(), 5000).show();
 		}
 
 	}
