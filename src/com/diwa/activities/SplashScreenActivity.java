@@ -27,7 +27,7 @@ public class SplashScreenActivity extends Activity {
 							UserNameCaptureActivity.class));
 				} else {
 					startActivity(new Intent(SplashScreenActivity.this,
-							ListActivity.class));
+							QuestionActivity.class));
 				}
 
 				finish();
